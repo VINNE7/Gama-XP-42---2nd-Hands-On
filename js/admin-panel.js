@@ -2,22 +2,23 @@ const formSelector = document.querySelector('#form');
 
 console.log(formSelector);
  
-formSelector.addEventListener('submit', e => {
-    e.preventDefault()
+formSelector.addEventListener('submit', (e) => {
+    e.preventDefault();
     const formData = new FormData(formSelector);
+    console.log(formData);
     
     const values = [...formData.entries()];
     console.log(values);
 
-    const attractionsArray = values[1][1].split(',');
-    const attractionsArrayTrimmed = attractionsArray.map(attraction => attraction.trim() );
+
+    const attractionsArray = values[1][1].split(',').map(attraction => attraction.trim() );
     
-    console.log(attractionsArrayTrimmed);
+    console.log(attractionsArray);
 
     const body = { 
         name: values[0][1],
-        poster: "https://i.imgur.com/fQHuZuv.png",
-        attractions: attractionsArrayTrimmed,
+        poster: "N/D",
+        attractions: attractionsArray,
         description: values[2][1],
         scheduled: values[3][1],
         number_tickets: parseInt(values[4][1])
@@ -38,6 +39,5 @@ formSelector.addEventListener('submit', e => {
         .catch(err => {
             console.error(err);
         });
-
 });
 
