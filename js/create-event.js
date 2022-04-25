@@ -1,30 +1,30 @@
-const formSelector = document.querySelector('#form');
+const formSelector = document.querySelector('#form')
+console.log(formSelector);
 
 formSelector.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const formObject = new FormData(formSelector);
 
-    const attractionsArray = formObject.get('attractions-input').split(',');
     
-    const attractionsArrayTrimmed = attractionsArray.map( (attraction) => { return attraction.trim() } )
-
-    const numberTickets = Number(formObject.get('capacity-input'))
+    const attractionsArray = formObject.get('attractions-input').split(', ');
     
-    const body = { 
+    const capacityNumber = Number(formObject.get('capacity-input'));
+  
+    const body = {
         "name": formObject.get('name-input'),
-        "attractions": attractionsArrayTrimmed,
         "poster": "N/D",
+        "attractions": attractionsArray,
         "description": formObject.get('description-input'),
         "scheduled": formObject.get('date-input'),
-        "number_tickets": numberTickets
-     }
+        "number_tickets": capacityNumber
+    }
 
-     fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
-         "method": "POST",
-         "headers": { "Content-Type": "application/JSON" },
-         "body": JSON.stringify(body)
-     }).then( response => console.log(response)).catch( error => console.error(error));
-
+    fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
+        "method": "POST",
+        "headers": { "content-type": "application/json" },
+        "body": JSON.stringify(body)
+    }).then( response => console.log(response) ).catch( error => console.error(error) );
 
 });
+
