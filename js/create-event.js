@@ -7,7 +7,7 @@ formSelector.addEventListener('submit', (event) => {
     const formObject = new FormData(formSelector);
 
     
-    const attractionsArray = formObject.get('attractions-input').split(', ');
+    const attractionsArray = formObject.get('attractions-input').split(',');
     
     const capacityNumber = Number(formObject.get('capacity-input'));
   
