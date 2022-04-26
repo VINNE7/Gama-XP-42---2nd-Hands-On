@@ -63,8 +63,9 @@ const arrowGetEvents = async () => {
 async function main() {
     try {
         const events = await arrowGetEvents();
-        console.log(events);
+        // console.log(events);
         const orderedEvents = orderEvents(events);
+        // console.log(orderedEvents);
         const removedPastEvents = removePastEvents(orderedEvents);
         console.log(removedPastEvents);
         renderEvents(removedPastEvents);
@@ -74,6 +75,9 @@ async function main() {
 }
 
 main();
+
+
+
 
 
 // async function getEvents(){
