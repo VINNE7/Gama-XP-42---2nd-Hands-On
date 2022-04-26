@@ -28,9 +28,6 @@ formSelector.addEventListener('submit', event => {
     })
         .then(response => {
             console.log(response);
-            setTimeout(function () {
-                window.location.href = '/admin.html';
-            }, 1000);
         })
         .catch(err => {
             console.error(err);
@@ -52,3 +49,23 @@ fetch("https://xp41-soundgarden-api.herokuapp.com/events/" + queryParameter.get(
     .catch(err => {
         console.error(err);
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // // setTimeout(function () {
+    //     window.location.href = '/admin.html';
+    // }, 1000);
