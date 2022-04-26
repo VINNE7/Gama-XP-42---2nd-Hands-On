@@ -28,6 +28,10 @@ formSelector.addEventListener('submit', event => {
     })
         .then(response => {
             console.log(response);
+            alert("Seu evento foi excluido com sucesso!")
+            setTimeout(function () {
+                window.location.href = '/admin.html';
+            }, 1000);
         })
         .catch(err => {
             console.error(err);
@@ -66,6 +70,4 @@ fetch("https://xp41-soundgarden-api.herokuapp.com/events/" + queryParameter.get(
 
 
 
-    // // setTimeout(function () {
-    //     window.location.href = '/admin.html';
-    // }, 1000);
+    

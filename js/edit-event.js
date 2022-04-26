@@ -38,9 +38,11 @@ formSelector.addEventListener('submit', event => {
   
 });
 
-fetch('https://xp41-soundgarden-api.herokuapp.com/events/'+ querySelector.get('id'),
-  {"method": "GET"}
-).then(response => response.json()).then(data => placeInputValuesFromEvent(data)).catch(error => console.error(error));
+fetch('https://xp41-soundgarden-api.herokuapp.com/events/' + querySelector.get('id'),
+  { "method": "GET" }
+).then(response => {return response.json()}
+).then(data => placeInputValuesFromEvent(data)
+).catch(error => console.error(error));
 
 
 // const queryParameter = new URLSearchParams(window.location.search);
