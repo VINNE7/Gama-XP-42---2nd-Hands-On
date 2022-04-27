@@ -21,9 +21,20 @@ formSelector.addEventListener('submit', (event) => {
         "method": "POST",
         "headers": { "content-type": "application/json" },
         "body": JSON.stringify(body)
-    }).then((response)=>console.log(response)).catch((error)=>console.error(error));
+    }).then((response)=>console.log(response)
+    ).then(()=>{
+        alert("Seu evento foi criado com sucesso");
+
+        setTimeout(function () {
+            window.location.href = '/admin.html';
+        }, 1000);
+    }
+    ).catch((error)=>console.error(error));
 
 })
+
+
+
 
 
 
