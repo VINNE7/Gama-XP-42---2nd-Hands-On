@@ -1,3 +1,4 @@
+
 const eventsContainerSelector = document.querySelector('#events-container');
 
 function createElementFromEvent(data){
