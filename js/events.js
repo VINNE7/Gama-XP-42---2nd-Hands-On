@@ -2,7 +2,7 @@
 const eventsContainerSelector = document.querySelector('#events-container');
 
 function createElementFromEvent(data){
-    data.forEach((event, index) => {
+    data.forEach((event) => {
         const articleElement = document.createElement('article');
         articleElement.classList.add('evento');
         articleElement.classList.add('card');
