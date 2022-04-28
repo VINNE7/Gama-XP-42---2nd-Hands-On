@@ -23,7 +23,7 @@ function createReserve(event){
         owner_name: nameSelector.value,
         owner_email: emailSelector.value,
         number_tickets: 1,
-        event_id : event.target.dataset.id
+        event_id: event.target.dataset.id
     }
 
     console.log(JSON.stringify(body));
