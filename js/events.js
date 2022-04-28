@@ -1,6 +1,43 @@
 
 const eventsContainerSelector = document.querySelector('#events-container');
 
+function onButtonClick(clickEvent) {
+    const button = clickEvent.target;
+
+    const modalLabelSelector = document.querySelector('#ModalLabel');
+
+    modalLabelSelector.innerText = button.dataset.name;
+
+    const reserveButton = document.querySelector('#reserveButton');
+
+    reserveButton.setAttribute('data-id', button.dataset.id);
+
+}
+
+function createReserve(event){
+    const nameSelector = document.querySelector('#name-input');
+
+    const emailSelector = document.querySelector('#email-input');
+
+    const body = {
+        owner_name: nameSelector.value,
+        owner_email: emailSelector.value,
+        number_tickets: 1,
+        event_id : event.target.dataset.id
+    }
+
+    console.log(JSON.stringify(body));
+
+   fetch('https://xp41-soundgarden-api.herokuapp.com/bookings', {
+        method: "POST",
+        headers: {
+            accept: "application-json",
+            "content-type": "application-json"},
+        body: JSON.stringify(body)
+   }).then(response => console.log(response)).catch( error => console.error(error));
+
+}
+
 function createElementFromEvent(data){
     data.forEach((event) => {
         const articleElement = document.createElement('article');
@@ -25,6 +62,12 @@ function createElementFromEvent(data){
         anchorButton.classList.add('btn');
         anchorButton.classList.add('btn-primary');
         anchorButton.innerText = 'reservar ingresso';
+        anchorButton.classList.add('btn-toggle-modal')
+        anchorButton.setAttribute('data-toggle', 'modal');
+        anchorButton.setAttribute('data-target', '#exampleModal');
+        anchorButton.setAttribute('data-id', event._id);
+        anchorButton.setAttribute('data-name', event.name);
+        anchorButton.addEventListener('click', (clickEvent) => onButtonClick(clickEvent) );
 
         articleElement.append(h2Element, h4Element, pElement, anchorButton);
 
@@ -37,9 +80,42 @@ function createElementFromEvent(data){
     })
 }
 
+function setEventListenerOnModalButton(){
+    const reserveButtonSelector = document.querySelector('#reserveButton');
 
-fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
-    "method": "GET",
-}).then(response => { return response.json() }
-).then(data => createElementFromEvent(data)
-).catch(error => console.log(error));
+    reserveButtonSelector.addEventListener('click', (event) => createReserve(event) );
+}
+
+
+const arrowGetEvents = async () => {
+    try {
+        const response = await fetch('https://xp41-soundgarden-api.herokuapp.com/events');
+        // console.log(response);
+
+        const data = await response.json();
+        // console.log(data);
+        return data;
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+async function main() {
+    try {
+        const data = await arrowGetEvents ();
+        
+
+        createElementFromEvent(data);
+
+        setEventListenerOnModalButton();
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+main();
