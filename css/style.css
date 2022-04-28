@@ -3,6 +3,10 @@ body{
     font-family: 'Questrial', sans-serif;
 }
 
+#form{
+    width: 100%;
+}
+
 .img-responsive {
     max-width: 100%;
 }

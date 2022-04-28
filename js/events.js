@@ -12,7 +12,7 @@ function createElementFromEvent(data){
 
         const h2Element = document.createElement('h2');
         const eventName = event.name;
-        const eventDate = event.scheduled.substring(0,10).replaceAll('-', '/');
+        const eventDate = event.scheduled.substring(0, 10).replaceAll('-', '/');
         h2Element.innerText = eventName + " - " + eventDate;
 
         const h4Element = document.createElement('h4');
@@ -40,6 +40,6 @@ function createElementFromEvent(data){
 
 fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
     "method": "GET",
-}).then(response => {return response.json()}
+}).then(response => { return response.json() }
 ).then(data => createElementFromEvent(data)
 ).catch(error => console.log(error));

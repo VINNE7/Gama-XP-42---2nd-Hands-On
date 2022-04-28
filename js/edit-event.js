@@ -35,13 +35,19 @@ function placeInputByEvent(event) {
   capacityInput.value = event.number_tickets;
 }
 
-function placeInputOnObject(){
+function createBodyFromInput(event){
   const nameSelector = document.querySelector("#name-input");
   const bannerSelector = document.querySelector("#banner-input");
   const attractionsSelector = document.querySelector("#attractions-input");
   const descriptionSelector = document.querySelector("#description-input");
   const dateSelector = document.querySelector("#date-input");
   const capacityInput = document.querySelector("#capacity-input");
+
+  // const body = {}
+
+  // if(nameSelector.value === event.name){
+  //   body.name = nameSelector.value;
+  // }
 
   return {
     "name": nameSelector.value,
@@ -58,6 +64,7 @@ async function main() {
   try {
     const queryParameter = new URLSearchParams(window.location.search);
     const event = await arrowGetEventById();
+    
 
     placeInputByEvent(event);
    
@@ -65,7 +72,9 @@ async function main() {
 
     formSelector.addEventListener('submit', (event) => {
       event.preventDefault();
-      const body =  placeInputOnObject();
+
+      const body =  createBodyFromInput(event);
+
       fetch(("https://xp41-soundgarden-api.herokuapp.com/events/" +
       queryParameter.get("id")), {"method": "PUT", "headers": {"content-type": "application/json"}, 
       "body": JSON.stringify(body)
@@ -76,12 +85,14 @@ async function main() {
 
     })
 
-  } catch {
+  } catch  {
     (error) => console.error(error);
   }
 }
 
 main();
+
+
 
 // const formSelector = document.querySelector('#form');
 // const nameSelector = document.querySelector('#name-input');

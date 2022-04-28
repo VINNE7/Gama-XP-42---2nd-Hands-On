@@ -146,7 +146,7 @@ main();
 
 //         const thElement = document.createElement('th');
 //         thElement.setAttribute('scope', 'row');
-//         thElement.innerText = index + 1; 
+//         thElement.innerText = index + 1;
 
 //         const firstTdElement = document.createElement('td');
 //         const date = event.scheduled.substring(0,10);
