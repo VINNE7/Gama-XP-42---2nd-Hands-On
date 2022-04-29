@@ -11,6 +11,68 @@ const arrowGetEvents = async () => {
     }
 }
 
+const arrowGetReserves = async (eventId) => {
+    const response = await fetch('https://xp41-soundgarden-api.herokuapp.com/bookings/event/' + eventId);
+
+    const data = await response.json();
+
+    return data;
+}
+
+function deleteReserve(event){
+    const reserveId = event.target.dataset.id;
+
+    console.log(reserveId);
+
+    fetch('https://xp41-soundgarden-api.herokuapp.com/bookings/' + reserveId, {method: "DELETE"}
+    ).then(response => console.log(response)
+    ).catch(error => console.error(error));
+}
+
+async function renderReserves(clickEvent){
+    const secondTableBodySelector = document.querySelector('#secondTable-body');
+    secondTableBodySelector.innerHTML = "";
+
+    const buttonSelector = clickEvent.target;
+
+    const reservesObject = await arrowGetReserves(clickEvent.target.dataset.id);
+
+    const modalLabel = document.querySelector('#ModalLabel');
+    modalLabel.innerText = clickEvent.target.dataset.name;
+
+    reservesObject.forEach( (reserve, index) => {
+        const trElement = document.createElement('tr');
+
+        const thElement = document.createElement('th');
+        thElement.innerText = index + 1;
+
+        const firstTdElement = document.createElement('td');
+        firstTdElement.innerText = reserve.owner_name;
+
+        const secondTdElement = document.createElement('td');
+        secondTdElement.innerText = reserve.owner_email;
+
+        const thirdTdElement = document.createElement('td');
+        thirdTdElement.innerText = clickEvent.target.dataset.name;
+
+        const fourthTdElement = document.createElement('td');
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = "Excluir";
+        deleteButton.classList.add('btn');
+        deleteButton.classList.add('btn-danger');
+        deleteButton.setAttribute('data-id', reserve._id)
+        deleteButton.addEventListener('click', (event) => { deleteReserve(event) })
+
+        fourthTdElement.appendChild(deleteButton)
+
+        trElement.append(thElement, firstTdElement, secondTdElement, thirdTdElement, fourthTdElement);
+        secondTableBodySelector.append(trElement);
+
+    });
+
+}
+
 const renderElements = (eventsArray) => {
     eventsArray.forEach( (event, index) => {
 
@@ -38,6 +100,11 @@ const renderElements = (eventsArray) => {
         firstAnchorTag.innerText = "Ver Reservas";
         firstAnchorTag.classList.add('btn');
         firstAnchorTag.classList.add('btn-dark');
+        firstAnchorTag.setAttribute('data-toggle', 'modal');
+        firstAnchorTag.setAttribute('data-target', '#exampleModal');
+        firstAnchorTag.setAttribute('data-id', event._id);
+        firstAnchorTag.setAttribute('data-name', event.name);
+        firstAnchorTag.addEventListener('click', (clickEvent) => renderReserves(clickEvent) );
 
 
         const secondAnchorTag = document.createElement('a');
@@ -65,8 +132,9 @@ const renderElements = (eventsArray) => {
 async function main() {
     try{
         const eventsArray = await arrowGetEvents();
-        console.log(eventsArray);
+        // console.log(eventsArray);
         renderElements(eventsArray);
+
     } catch (error) {
         console.error(error)
     }
