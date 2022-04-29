@@ -26,9 +26,9 @@ formSelector.addEventListener('submit', (event) => {
     ).then(()=>{
         alert("Seu evento foi criado com sucesso");
 
-        // setTimeout(function () {
-        //     window.location.href = '/admin.html';
-        // }, 1000);
+        setTimeout(function () {
+            window.location.href = '/admin.html';
+        }, 1000);
     }
     ).catch((error)=>console.error(error));
 
