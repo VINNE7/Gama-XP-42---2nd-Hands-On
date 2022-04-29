@@ -30,7 +30,7 @@ formSelector.addEventListener('submit', event => {
             console.log(response);
             alert("Seu evento foi excluido com sucesso!")
             setTimeout(function () {
-                window.location.href = '/admin.html';
+                window.location.href = './admin.html';
             }, 1000);
         })
         .catch(err => {

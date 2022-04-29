@@ -115,14 +115,14 @@ const renderElements = (eventsArray) => {
         secondAnchorTag.innerText = "Editar";
         secondAnchorTag.classList.add('btn');
         secondAnchorTag.classList.add('btn-secondary');
-        secondAnchorTag.setAttribute('href', ('editar-evento.html?id=' + event._id));
+        secondAnchorTag.setAttribute('href', ('./editar-evento.html?id=' + event._id));
 
 
         const thirdAnchorTag = document.createElement('a');
         thirdAnchorTag.innerText = "Excluir";
         thirdAnchorTag.classList.add('btn');
         thirdAnchorTag.classList.add('btn-danger');
-        thirdAnchorTag.setAttribute('href', ('excluir-evento.html?id=' + event._id));
+        thirdAnchorTag.setAttribute('href', ('./excluir-evento.html?id=' + event._id));
 
         forthTdElement.append(firstAnchorTag, secondAnchorTag, thirdAnchorTag);
 
