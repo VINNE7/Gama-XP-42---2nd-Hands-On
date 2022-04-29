@@ -22,7 +22,10 @@ const arrowGetReserves = async (eventId) => {
 function deleteReserve(event){
     const reserveId = event.target.dataset.id;
 
-    console.log(reserveId);
+    const reserveSelector = document.getElementById(reserveId);
+    
+
+    reserveSelector.remove();
 
     fetch('https://xp41-soundgarden-api.herokuapp.com/bookings/' + reserveId, {method: "DELETE"}
     ).then(response => console.log(response)
@@ -42,6 +45,7 @@ async function renderReserves(clickEvent){
 
     reservesObject.forEach( (reserve, index) => {
         const trElement = document.createElement('tr');
+        trElement.setAttribute('id', reserve._id);
 
         const thElement = document.createElement('th');
         thElement.innerText = index + 1;

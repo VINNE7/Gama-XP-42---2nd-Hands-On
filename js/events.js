@@ -28,13 +28,19 @@ function createReserve(event){
 
     console.log(JSON.stringify(body));
 
-   fetch('https://xp41-soundgarden-api.herokuapp.com/bookings', {
+    fetch("https://xp41-soundgarden-api.herokuapp.com/bookings", {
         method: "POST",
         headers: {
-            accept: "application-json",
-            "content-type": "application-json"},
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(body)
-   }).then(response => console.log(response)).catch( error => console.error(error));
+    })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
 }
 
